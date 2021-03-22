@@ -2185,6 +2185,7 @@ static size_t log_event_print_value(IO_CACHE *file, const uchar *ptr, uint type,
       }
       return length + meta;
     }
+
     case MYSQL_TYPE_INVALID:
     default: {
       char tmp[5];
