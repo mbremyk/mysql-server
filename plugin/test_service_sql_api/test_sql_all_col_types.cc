@@ -489,6 +489,8 @@ static const char *fieldtype2str(enum enum_field_types type) {
       return "BIT";
     case MYSQL_TYPE_BLOB:
       return "BLOB";
+    case MYSQL_TYPE_BOOL:
+      return "BOOL";
     case MYSQL_TYPE_DATE:
       return "DATE";
     case MYSQL_TYPE_DATETIME:
@@ -639,6 +641,7 @@ static void get_data_bin(struct st_plugin_ctx *pctx) {
         case MYSQL_TYPE_INT24:
         case MYSQL_TYPE_LONG:
         case MYSQL_TYPE_SHORT:
+        case MYSQL_TYPE_BOOL:
         case MYSQL_TYPE_TINY: {
           int temp_int = pctx->sql_int_value[row][col] * 10;
           WRITE_VAL2("%d*10=%d  ", pctx->sql_int_value[row][col], temp_int);
