@@ -475,6 +475,12 @@ class Statement_backup {
   @param  len               length of data in the buffer
 */
 
+static void set_param_bool(Item_param *param, uchar **pos, ulong len) {
+  if (len < 1) return;
+  int8 value = static_cast<int8>(* *pos);
+  param->set_int(static_cast<ulonglong>(static_cast<uint8>(value)));
+}
+
 static void set_param_tiny(Item_param *param, uchar **pos, ulong len) {
   if (len < 1) return;
   int8 value = (int8) * *pos;
@@ -621,6 +627,9 @@ static void set_param_str(Item_param *param, uchar **pos, ulong len) {
 static bool setup_one_conversion_function(Item_param *param,
                                           const CHARSET_INFO *cs_source) {
   switch (param->data_type_actual()) {
+    case MYSQL_TYPE_BOOL:
+      param->set_param_func = set_param_bool;
+      break;
     case MYSQL_TYPE_TINY:
       param->set_param_func = set_param_tiny;
       break;

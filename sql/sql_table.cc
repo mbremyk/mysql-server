@@ -7405,6 +7405,7 @@ bool Item_field::replace_field_processor(uchar *arg) {
         break;
       }
       case MYSQL_TYPE_INT24:
+      case MYSQL_TYPE_BOOL:
       case MYSQL_TYPE_TINY:
       case MYSQL_TYPE_SHORT:
       case MYSQL_TYPE_LONG:

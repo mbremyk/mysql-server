@@ -43,6 +43,7 @@
 */
 inline bool is_integer_type(enum_field_types type) {
   switch (type) {
+    case MYSQL_TYPE_BOOL:
     case MYSQL_TYPE_TINY:
     case MYSQL_TYPE_SHORT:
     case MYSQL_TYPE_INT24:
@@ -64,6 +65,7 @@ inline bool is_integer_type(enum_field_types type) {
 */
 inline bool is_numeric_type(enum_field_types type) {
   switch (type) {
+    case MYSQL_TYPE_BOOL:
     case MYSQL_TYPE_TINY:
     case MYSQL_TYPE_SHORT:
     case MYSQL_TYPE_INT24:
@@ -201,6 +203,7 @@ inline bool is_timestamp_type(enum_field_types type) {
 */
 inline bool has_signedess_information_type(enum_field_types type) {
   switch (type) {
+    case MYSQL_TYPE_BOOL: //maybe here??
     case MYSQL_TYPE_TINY:
     case MYSQL_TYPE_SHORT:
     case MYSQL_TYPE_INT24:

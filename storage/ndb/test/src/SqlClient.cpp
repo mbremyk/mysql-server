@@ -143,6 +143,7 @@ SqlClient::disconnect(){
 
 static bool is_int_type(enum_field_types type){
   switch(type){
+  case MYSQL_TYPE_BOOL:
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
   case MYSQL_TYPE_LONGLONG:
