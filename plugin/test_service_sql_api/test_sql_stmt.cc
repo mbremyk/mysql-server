@@ -1083,19 +1083,20 @@ static void test_4(MYSQL_SESSION session, void *p) {
                         " c6  bigint,"
                         " c7  float,"
                         " c8  double,"
-                        " c9 date)");
+                        " c9  date,"
+                        " c10 bool)");
   run_cmd(session, COM_QUERY, &cmd, &ctx, false, p);
 
   WRITE_STR("CREATE PREPARED STATEMENT\n");
   memset(&cmd, 0, sizeof(cmd));
   cmd.com_stmt_prepare.query =
-      "INSERT INTO t2(c1, c2, c3, c4, c5, c6, c7, c8, c9) "
-      "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO t2(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) "
+      "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   cmd.com_stmt_prepare.length = strlen(cmd.com_stmt_prepare.query);
   run_cmd(session, COM_STMT_PREPARE, &cmd, &ctx, false, p);
 
   WRITE_STR("EXECUTE PREPARED STATEMENT WITH PARAMETERS AND CURSOR\n");
-  PS_PARAM multi_param[9];
+  PS_PARAM multi_param[10];
   memset(multi_param, 0, sizeof(multi_param));
   memset(&cmd, 0, sizeof(cmd));
   cmd.com_stmt_execute.stmt_id = ctx.stmt_id;
@@ -1103,6 +1104,7 @@ static void test_4(MYSQL_SESSION session, void *p) {
   cmd.com_stmt_execute.has_new_types = true;
   cmd.com_stmt_execute.parameters = multi_param;
 
+  bool bool_data = true;
   int8 i8_data = 1;
   int16 i16_data = 1;
   int32 i32_data = 10;
@@ -1169,6 +1171,12 @@ static void test_4(MYSQL_SESSION session, void *p) {
   multi_param[8].type = MYSQL_TYPE_DATE;
   multi_param[8].unsigned_type = false;
 
+  /*boolean*/
+  multi_param[9].null_bit = false;
+  multi_param[9].length = sizeof(bool);
+  multi_param[9].type = MYSQL_TYPE_BOOL;
+  multi_param[9].unsigned_type = false;
+
   while (i8_data < 10) {
     multi_param[0].value = (const unsigned char *)&i8_data;
 
@@ -1201,8 +1209,11 @@ static void test_4(MYSQL_SESSION session, void *p) {
     pos += sizeof(double);
 
     multi_param[8].value = (const unsigned char *)&date_t;
+
+    multi_param[9].value = (const unsigned char *)&bool_data;
+
     cmd.com_stmt_execute.has_new_types = ((i8_data % 2 == 0));
-    cmd.com_stmt_execute.parameter_count = 9;
+    cmd.com_stmt_execute.parameter_count = 10;
     run_cmd(session, COM_STMT_EXECUTE, &cmd, &ctx, false, p);
     i8_data++;
     i16_data++;
@@ -1210,6 +1221,7 @@ static void test_4(MYSQL_SESSION session, void *p) {
     i64_data++;
     f_data++;
     d_data++;
+    bool_data = !bool_data;
   }
 
   set_query_in_com_data(&cmd, "SELECT * FROM t2");
@@ -1762,16 +1774,6 @@ static void test_11(MYSQL_SESSION session, void *p) {
 
   WRITE_STR("EXECUTE THE PS WITH INVALID PARAMETER TYPE\n");
   run_cmd(session, COM_STMT_EXECUTE, &cmd, &ctx, false, p);
-
-  params[0].type = MYSQL_TYPE_BOOL;
-  params[0].unsigned_type = false;
-  params[0].null_bit = false;
-  params[0].value = (const unsigned char *)"bool";
-  params[0].length = 1;
-
-  WRITE_STR("EXECUTE THE PS WITH BOOL PARAMETER TYPE\n");
-  run_cmd(session, COM_STMT_EXECUTE, &cmd, &ctx, false, p);
-
   DBUG_VOID_RETURN;
 }
 

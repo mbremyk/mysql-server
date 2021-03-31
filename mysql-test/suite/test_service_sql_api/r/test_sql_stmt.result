@@ -1630,7 +1630,7 @@ Test ps with different data-types
 CREATE TABLE
 ------------------------------------------------------------------
 [CS_TEXT_REPRESENTATION]
-COM_QUERY: query[CREATE TABLE t2( c1  tinyint, c2  smallint, c3  mediumint, c4  int, c5  integer, c6  bigint, c7  float, c8  double, c9 date)]
+COM_QUERY: query[CREATE TABLE t2( c1  tinyint, c2  smallint, c3  mediumint, c4  int, c5  integer, c6  bigint, c7  float, c8  double, c9  date, c10 bool)]
 handle_ok
 <<<<<<<<<<<< Current context >>>>>>>>>>>>>>>
 	[end] server status: 2
@@ -1644,7 +1644,7 @@ handle_ok
 CREATE PREPARED STATEMENT
 ------------------------------------------------------------------
 [CS_TEXT_REPRESENTATION]
-COM_STMT_PREPARE: query[INSERT INTO t2(c1, c2, c3, c4, c5, c6, c7, c8, c9) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)]
+COM_STMT_PREPARE: query[INSERT INTO t2(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
 handle_start_column_metadata
 handle_end_column_metadata
 handle_start_row
@@ -1719,7 +1719,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -1791,7 +1791,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -1863,7 +1863,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -1935,7 +1935,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -2007,7 +2007,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -2079,7 +2079,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -2151,7 +2151,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -2223,7 +2223,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -2313,7 +2313,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -2416,6 +2416,17 @@ handle_ok
 		[meta][field] decimals: 0
 		[meta][field] type: DATE (10)
 
+		[meta][field] db name: test
+		[meta][field] table name: t2
+		[meta][field] org table name: t2
+		[meta][field] col name: c10
+		[meta][field] org col name: c10
+		[meta][field] length: 1
+		[meta][field] charsetnr: 8
+		[meta][field] flags: 0
+		[meta][field] decimals: 0
+		[meta][field] type: BOOL (244)
+
 
 	[meta][charset result] number: 33
 	[meta][charset result] name: utf8
@@ -2440,6 +2451,8 @@ handle_ok
 		[data][t2.c8][  8][6576.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][3]
@@ -2459,6 +2472,8 @@ handle_ok
 		[data][t2.c8][  8][6577.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][4]
@@ -2478,6 +2493,8 @@ handle_ok
 		[data][t2.c8][  8][6578.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][5]
@@ -2497,6 +2514,8 @@ handle_ok
 		[data][t2.c8][  8][6579.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][6]
@@ -2516,6 +2535,8 @@ handle_ok
 		[data][t2.c8][  8][6580.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][7]
@@ -2535,6 +2556,8 @@ handle_ok
 		[data][t2.c8][  8][6581.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][8]
@@ -2554,6 +2577,8 @@ handle_ok
 		[data][t2.c8][  8][6582.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][9]
@@ -2573,6 +2598,8 @@ handle_ok
 		[data][t2.c8][  8][6583.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[end] server status: 34
 	[end] server status: AUTOCOMMIT QUERY_NO_INDEX_USED 
@@ -5031,13 +5058,6 @@ handle_start_column_metadata
 handle_end_column_metadata
 ------------------------------------------------------------------
 EXECUTE THE PS WITH INVALID PARAMETER TYPE
-------------------------------------------------------------------
-[CS_TEXT_REPRESENTATION]
-COM_STMT_EXECUTE: stmt_id [11]
-handle_error
-[1210][HY000][Incorrect arguments to mysqld_stmt_execute]
-------------------------------------------------------------------
-EXECUTE THE PS WITH BOOL PARAMETER TYPE
 ------------------------------------------------------------------
 [CS_TEXT_REPRESENTATION]
 COM_STMT_EXECUTE: stmt_id [11]
@@ -6790,7 +6810,7 @@ Test ps with different data-types
 CREATE TABLE
 ------------------------------------------------------------------
 [CS_TEXT_REPRESENTATION]
-COM_QUERY: query[CREATE TABLE t2( c1  tinyint, c2  smallint, c3  mediumint, c4  int, c5  integer, c6  bigint, c7  float, c8  double, c9 date)]
+COM_QUERY: query[CREATE TABLE t2( c1  tinyint, c2  smallint, c3  mediumint, c4  int, c5  integer, c6  bigint, c7  float, c8  double, c9  date, c10 bool)]
 handle_ok
 <<<<<<<<<<<< Current context >>>>>>>>>>>>>>>
 	[end] server status: 2
@@ -6804,7 +6824,7 @@ handle_ok
 CREATE PREPARED STATEMENT
 ------------------------------------------------------------------
 [CS_TEXT_REPRESENTATION]
-COM_STMT_PREPARE: query[INSERT INTO t2(c1, c2, c3, c4, c5, c6, c7, c8, c9) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)]
+COM_STMT_PREPARE: query[INSERT INTO t2(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
 handle_start_column_metadata
 handle_end_column_metadata
 handle_start_row
@@ -6879,7 +6899,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -6951,7 +6971,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7023,7 +7043,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7095,7 +7115,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7167,7 +7187,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7239,7 +7259,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7311,7 +7331,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7383,7 +7403,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7473,7 +7493,7 @@ handle_ok
 	[meta] current col: 1
 		[data][.column_no][  1][0]
 	[meta] current col: 2
-		[data][.param_no][  1][9]
+		[data][.param_no][  2][10]
 	[meta] current col: 3
 		[data][.warning_no][  1][0]
 
@@ -7576,6 +7596,17 @@ handle_ok
 		[meta][field] decimals: 0
 		[meta][field] type: DATE (10)
 
+		[meta][field] db name: test
+		[meta][field] table name: t2
+		[meta][field] org table name: t2
+		[meta][field] col name: c10
+		[meta][field] org col name: c10
+		[meta][field] length: 1
+		[meta][field] charsetnr: 8
+		[meta][field] flags: 0
+		[meta][field] decimals: 0
+		[meta][field] type: BOOL (244)
+
 
 	[meta][charset result] number: 33
 	[meta][charset result] name: utf8
@@ -7600,6 +7631,8 @@ handle_ok
 		[data][t2.c8][  8][6576.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][3]
@@ -7619,6 +7652,8 @@ handle_ok
 		[data][t2.c8][  8][6577.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][4]
@@ -7638,6 +7673,8 @@ handle_ok
 		[data][t2.c8][  8][6578.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][5]
@@ -7657,6 +7694,8 @@ handle_ok
 		[data][t2.c8][  8][6579.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][6]
@@ -7676,6 +7715,8 @@ handle_ok
 		[data][t2.c8][  8][6580.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][7]
@@ -7695,6 +7736,8 @@ handle_ok
 		[data][t2.c8][  8][6581.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][8]
@@ -7714,6 +7757,8 @@ handle_ok
 		[data][t2.c8][  8][6582.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][0]
 
 	[meta] current col: 0
 		[data][t2.c1][  1][9]
@@ -7733,6 +7778,8 @@ handle_ok
 		[data][t2.c8][  8][6583.001]
 	[meta] current col: 8
 		[data][t2.c9][ 10][1988-12-20]
+	[meta] current col: 9
+		[data][t2.c10][  1][1]
 
 	[end] server status: 34
 	[end] server status: AUTOCOMMIT QUERY_NO_INDEX_USED 
@@ -10191,13 +10238,6 @@ handle_start_column_metadata
 handle_end_column_metadata
 ------------------------------------------------------------------
 EXECUTE THE PS WITH INVALID PARAMETER TYPE
-------------------------------------------------------------------
-[CS_TEXT_REPRESENTATION]
-COM_STMT_EXECUTE: stmt_id [11]
-handle_error
-[1210][HY000][Incorrect arguments to mysqld_stmt_execute]
-------------------------------------------------------------------
-EXECUTE THE PS WITH BOOL PARAMETER TYPE
 ------------------------------------------------------------------
 [CS_TEXT_REPRESENTATION]
 COM_STMT_EXECUTE: stmt_id [11]
