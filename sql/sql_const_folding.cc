@@ -334,6 +334,11 @@ static bool analyze_int_field_constant(THD *thd, Item_field *f,
   longlong u_max = 0;
 
   switch (f->field->type()) {
+    case MYSQL_TYPE_BOOL:
+      s_max = true;
+      s_min = false;
+      u_max = true;
+      break;
     case MYSQL_TYPE_TINY:
       s_max = INT_MAX8;
       s_min = INT_MIN8;

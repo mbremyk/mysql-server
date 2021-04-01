@@ -4264,6 +4264,7 @@ static TABLE *create_schema_table(THD *thd, TABLE_LIST *table_list) {
 
   for (; fields_info->field_name; fields_info++) {
     switch (fields_info->field_type) {
+      case MYSQL_TYPE_BOOL:
       case MYSQL_TYPE_TINY:
       case MYSQL_TYPE_LONG:
       case MYSQL_TYPE_SHORT:

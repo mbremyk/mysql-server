@@ -382,6 +382,7 @@ bool get_field_numeric_scale(const Create_field *field, uint *scale) {
     case MYSQL_TYPE_DECIMAL:
       *scale = field->decimals;
       return false;
+    case MYSQL_TYPE_BOOL:
     case MYSQL_TYPE_TINY:
     case MYSQL_TYPE_SHORT:
     case MYSQL_TYPE_LONG:
@@ -403,6 +404,9 @@ bool get_field_numeric_precision(const Create_field *field,
                                  uint *numeric_precision) {
   switch (field->sql_type) {
       // these value is taken from Field_XXX::max_display_length() -1
+    case MYSQL_TYPE_BOOL:
+      *numeric_precision = 1;
+      return false;
     case MYSQL_TYPE_TINY:
       *numeric_precision = 3;
       return false;
@@ -660,6 +664,7 @@ bool fill_dd_columns_from_create_fields(THD *thd, dd::Abstract_table *tab_obj,
       case MYSQL_TYPE_DECIMAL:
         col_obj->set_numeric_scale(field.decimals);
         break;
+      case MYSQL_TYPE_BOOL: //maybe not if not numeric
       case MYSQL_TYPE_TINY:
       case MYSQL_TYPE_SHORT:
       case MYSQL_TYPE_LONG:

@@ -406,6 +406,7 @@ bool fix_param_bind(MYSQL_BIND *param, uint idx) {
     case MYSQL_TYPE_NULL:
       param->is_null = &int_is_null_true;
       break;
+    case MYSQL_TYPE_BOOL:
     case MYSQL_TYPE_TINY:
       /* Force param->length as this is fixed for this type */
       param->length = &param->buffer_length;

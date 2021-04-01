@@ -1836,6 +1836,7 @@ bool Item_func_geomfromgeojson::check_argument_valid_integer(Item *argument) {
     case MYSQL_TYPE_LONG:
     case MYSQL_TYPE_LONGLONG:
     case MYSQL_TYPE_SHORT:
+    case MYSQL_TYPE_BOOL:
     case MYSQL_TYPE_TINY:
       return true;
     default:
@@ -2777,6 +2778,7 @@ bool Item_func_geohash::fix_fields(THD *thd, Item **ref) {
                        args[geohash_length_arg_index]->type() == INT_ITEM);
 
   switch (args[geohash_length_arg_index]->data_type()) {
+    case MYSQL_TYPE_BOOL: //maybe not
     case MYSQL_TYPE_TINY:
     case MYSQL_TYPE_SHORT:
     case MYSQL_TYPE_LONG:
@@ -4267,6 +4269,7 @@ bool Item_func_pointfromgeohash::fix_fields(THD *thd, Item **ref) {
     case MYSQL_TYPE_LONG:
     case MYSQL_TYPE_LONGLONG:
     case MYSQL_TYPE_SHORT:
+    case MYSQL_TYPE_BOOL: //maybe not
     case MYSQL_TYPE_TINY:
       break;
     default:

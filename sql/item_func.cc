@@ -6743,6 +6743,7 @@ bool Item_func_get_user_var::propagate_type(THD *,
       unsigned_flag = true;
       break;
     case MYSQL_TYPE_YEAR:
+    case MYSQL_TYPE_BOOL:
       set_data_type_longlong();
       break;
     case MYSQL_TYPE_NEWDECIMAL:

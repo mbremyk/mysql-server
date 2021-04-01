@@ -3575,6 +3575,7 @@ bool Item_param::fix_fields(THD *, Item **) {
 bool Item_param::propagate_type(THD *, const Type_properties &type) {
   DBUG_ASSERT(type.m_type != MYSQL_TYPE_INVALID);
   switch (type.m_type) {
+    case MYSQL_TYPE_BOOL:
     case MYSQL_TYPE_TINY:
     case MYSQL_TYPE_SHORT:
     case MYSQL_TYPE_INT24:
@@ -9693,7 +9694,7 @@ uint32 Item_aggregate_type::display_length(Item *item) {
     case MYSQL_TYPE_JSON:
       return item->max_length;
     case MYSQL_TYPE_BOOL:
-      return 5;
+      return 1;
     case MYSQL_TYPE_TINY:
       return 4;
     case MYSQL_TYPE_SHORT:
