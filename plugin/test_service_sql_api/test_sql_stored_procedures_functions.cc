@@ -469,7 +469,7 @@ static const char *fieldtype2str(enum enum_field_types type) {
     case MYSQL_TYPE_BLOB:
       return "BLOB";
     case MYSQL_TYPE_BOOL:
-      return "BOOL";
+      return "BOOLEAN";
     case MYSQL_TYPE_DATE:
       return "DATE";
     case MYSQL_TYPE_DATETIME:

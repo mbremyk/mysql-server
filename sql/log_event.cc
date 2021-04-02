@@ -1897,7 +1897,7 @@ static size_t log_event_print_value(IO_CACHE *file, const uchar *ptr, uint type,
     }
 
     case MYSQL_TYPE_BOOL:{
-      snprintf(typestr, typestr_length, "BOOL");
+      snprintf(typestr, typestr_length, "BOOLEAN");
       if (!ptr) return my_b_printf(file, "NULL");
       my_b_write_sint32_and_uint32(file, (int)(signed char)*ptr,
                                    (uint)(unsigned char)*ptr);
