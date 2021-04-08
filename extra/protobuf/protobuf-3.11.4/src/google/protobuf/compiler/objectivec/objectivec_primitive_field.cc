@@ -64,7 +64,7 @@ const char* PrimitiveTypeName(const FieldDescriptor* descriptor) {
     case OBJECTIVECTYPE_DOUBLE:
       return "double";
     case OBJECTIVECTYPE_BOOLEAN:
-      return "BOOL";
+      return "boolean";
     case OBJECTIVECTYPE_STRING:
       return "NSString";
     case OBJECTIVECTYPE_DATA:

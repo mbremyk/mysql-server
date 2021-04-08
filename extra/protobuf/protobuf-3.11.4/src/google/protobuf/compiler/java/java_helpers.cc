@@ -467,7 +467,7 @@ const char* FieldTypeName(FieldDescriptor::Type field_type) {
     case FieldDescriptor::TYPE_DOUBLE:
       return "DOUBLE";
     case FieldDescriptor::TYPE_BOOL:
-      return "BOOL";
+      return "BOOLEAN";//maybe not
     case FieldDescriptor::TYPE_STRING:
       return "STRING";
     case FieldDescriptor::TYPE_BYTES:
