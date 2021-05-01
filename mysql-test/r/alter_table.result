@@ -95,11 +95,15 @@ CREATE TABLE t1 (int_to_boolean INT, bool_to_decimal BOOLEAN, double_to_boolean 
 Warnings:
 Warning	1681	Specifying number of digits for floating point data types is deprecated and will be removed in a future release.
 INSERT INTO t1 VALUES(20, TRUE, 0.4444);
+SELECT * FROM t1;
+int_to_boolean	bool_to_decimal	double_to_boolean
+20	1	0.4444
+ALTER TABLE t1 MODIFY int_to_boolean BOOLEAN;
 ALTER TABLE t1 MODIFY bool_to_decimal DECIMAL(5,2);
 ALTER TABLE t1 MODIFY double_to_boolean BOOLEAN;
 SELECT * FROM t1;
 int_to_boolean	bool_to_decimal	double_to_boolean
-20	1.00	0
+1	1.00	1
 DROP TABLE t1;
 create table t1 (n int);
 insert into t1 values(9),(3),(12),(10);
