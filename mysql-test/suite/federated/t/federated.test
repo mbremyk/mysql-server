@@ -2124,6 +2124,25 @@ DROP TABLE federated.t1;
 connection slave;
 DROP TABLE federated.t1;
 
+--echo ##
+--echo ## WL#3554 Boolean data type
+--echo ##
+
+connection slave;
+create table federated.t1 (b1 BOOLEAN, b2 BOOL);
+
+connection master;
+--replace_result $SLAVE_MYPORT SLAVE_PORT
+eval create table federated.t1 (b1 BOOLEAN, b2 BOOL) ENGINE=FEDERATED CONNECTION='mysql://root@127.0.0.1:$SLAVE_MYPORT/federated/t1';
+--replace_result $SLAVE_MYPORT SLAVE_PORT
+eval create table federated.t2 (id int, c1 varchar(20), c2 varchar(20)) ENGINE=FEDERATED CONNECTION='mysql://root@127.0.0.1:$SLAVE_MYPORT/federated/t2';
+insert into federated.t1 values (TRUE, FALSE),(5, -5);
+SHOW COLUMNS FROM federated.t1;
+drop table federated.t1;
+connection slave;
+drop table federated.t1;
+
+
 --echo #
 --echo # Bug#28877215 CANNOT CREATE A JSON VALUE FROM A STRING WITH CHARACTER SET 'BINARY'
 --echo #
@@ -2157,3 +2176,4 @@ SET @@GLOBAL.CONCURRENT_INSERT= @OLD_SLAVE_CONCURRENT_INSERT;
 
 connection default;
 source suite/federated/include/federated_cleanup.inc;
+

@@ -2421,6 +2421,19 @@ b
 
 DROP TABLE federated.t1;
 DROP TABLE federated.t1;
+##
+## WL#3554 Boolean data type
+##
+create table federated.t1 (b1 BOOLEAN, b2 BOOL);
+create table federated.t1 (b1 BOOLEAN, b2 BOOL) ENGINE=FEDERATED CONNECTION='mysql://root@127.0.0.1:SLAVE_PORT/federated/t1';
+create table federated.t2 (id int, c1 varchar(20), c2 varchar(20)) ENGINE=FEDERATED CONNECTION='mysql://root@127.0.0.1:SLAVE_PORT/federated/t2';
+insert into federated.t1 values (TRUE, FALSE),(5, -5);
+SHOW COLUMNS FROM federated.t1;
+Field	Type	Null	Key	Default	Extra
+b1	boolean	YES		NULL	
+b2	boolean	YES		NULL	
+drop table federated.t1;
+drop table federated.t1;
 #
 # Bug#28877215 CANNOT CREATE A JSON VALUE FROM A STRING WITH CHARACTER SET 'BINARY'
 #
